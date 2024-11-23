@@ -8,8 +8,21 @@ A full-fledged Bakery Web application designed to offer a seamless shopping expe
 - **Order Placement**: Place orders for the items in your cart.
 - **Feedback**: Give Reviews to the products 
 
+## Usage
+
+1. **Login as a User**:
+   - After logging in, browse the available bakery products in the catalog.
+   - You can place orders and view your order history.
+
+2. **Login as Admin**:
+   - Admins can manage the bakery inventory, products, and orders placed by users.
+   - Admins can also oversee user accounts and review customer feedback.
   
 ## Technologies Used
-- **Frontend**: React
-- **Backend**: Node.js
+
+- **Frontend**: React, React Router
+- **Backend**: Node.js, Express
+- **Database**: MySQL
+- **Styling**: CSS
+- **Authentication**: Simple login mechanism for users and admin
 
