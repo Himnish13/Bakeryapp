@@ -12,7 +12,4 @@ A full-fledged Bakery Web application designed to offer a seamless shopping expe
 ## Technologies Used
 - **Frontend**: React
 - **Backend**: Node.js
-- **Authentication**: Firebase Authentication (OTP)
-- **Database**: Firebase Firestore
-- **Payment Processing**: Razorpay
-- **Email Notifications**: Nodemailer
+
