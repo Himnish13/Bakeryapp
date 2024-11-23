@@ -6,4 +6,13 @@ A full-fledged Bakery Web application designed to offer a seamless shopping expe
 - **Product Browsing**: Browse through a variety of bakery items categorized for easy navigation.
 - **Cart Management**: Add items to your cart, view cart details, update quantities, and remove items.
 - **Order Placement**: Place orders for the items in your cart.
-- **Feedback**: Give Reviews to the products 
+- **Feedback**: Give Reviews to the products \
+
+  
+## Technologies Used
+- **Frontend**: React
+- **Backend**: Node.js
+- **Authentication**: Firebase Authentication (OTP)
+- **Database**: Firebase Firestore
+- **Payment Processing**: Razorpay
+- **Email Notifications**: Nodemailer
