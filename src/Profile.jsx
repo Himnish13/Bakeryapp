@@ -13,7 +13,7 @@ export default function Profile() {
     if (storedUserId) {
       setUserId(storedUserId); // Update userId state
     } else {
-      navigate('/login'); // Redirect to login if no userId
+      navigate('/login'); //  Redirect to login if no userId
     }
   }, [navigate]);
 

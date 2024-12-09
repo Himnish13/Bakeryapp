@@ -12,7 +12,7 @@ function ReviewPage() {
   const location = useLocation();
   const { orderId } = location.state || {}; // Ensure this is getting the orderId properly
 
-  // Load user ID from localStorage
+  //  Load user ID from localStorage
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) setUserId(storedUserId);

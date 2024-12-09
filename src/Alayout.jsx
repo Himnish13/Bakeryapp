@@ -6,6 +6,7 @@ function ALayout() {
   return (
     <div>
       <ANav/>
+      
       <Outlet/>
       <Footer/>
     </div>

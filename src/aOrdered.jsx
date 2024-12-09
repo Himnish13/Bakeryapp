@@ -14,7 +14,7 @@ function AReview() {
       fetch(`http://localhost:8080/rev/${orderId}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("Fetched data:", data); // Log the fetched data to check the structure
+          console.log("Fetched data:", data); //  Log the fetched data to check the structure
           // Ensure data is an array before setting state
           if (Array.isArray(data)) {
             setPro(data);

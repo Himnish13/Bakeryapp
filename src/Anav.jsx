@@ -13,7 +13,7 @@ function ANav() {
 
   const handleLogout = () => {
     localStorage.removeItem("userId"); // Remove userId from localStorage
-    navigate("/admin"); // Redirect to the login page
+    navigate("/admin");  // Redirect to the login page
   };
 
   return (

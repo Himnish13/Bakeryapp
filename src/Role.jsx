@@ -12,7 +12,7 @@ function Role() {
     }
     if (role === "admin") {
       navigate("/admin");
-      // Add logic for redirection to admin page
+      //  Add logic for redirection to admin page
     } else if (role === "user") {
       navigate("/login");
       // Add logic for redirection to user page

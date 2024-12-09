@@ -15,7 +15,7 @@ function AddNew() {
     event.preventDefault();
 
     if (!productName || !productPrice || !productDescription || !productCategory || !productInitialQuantity || !productUrl) {
-      setError('Please fill in all fields');
+       setError('Please fill in all fields');
       return;
     }
 

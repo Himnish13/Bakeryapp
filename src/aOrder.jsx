@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';  // For navigation
 export default function AOrder() {
 
   const [data, update] = useState([]);
-  const navigate = useNavigate();  // Initialize navigate for programmatic navigation
+  const navigate = useNavigate();   // Initialize navigate for programmatic navigation
   
    
 

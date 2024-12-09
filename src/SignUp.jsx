@@ -10,7 +10,7 @@ function Sign() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Ensure all fields are filled
+    //  Ensure all fields are filled
     if (!firstName || !lastName || !email || !password) {
       alert('All fields are required!');
       return;
