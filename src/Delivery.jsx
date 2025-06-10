@@ -1,5 +1,5 @@
 import React from 'react';
-import './delivery.css';
+import './Delivery.css';
 
 const DeliveryInfo=()=>{
     return(
