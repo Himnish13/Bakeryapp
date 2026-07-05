@@ -7,11 +7,11 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
+  host: "mysql-3d83c4eb-rollno21eight-d059.g.aivencloud.com",
+  user: "avnadmin",
   password: "",
-  database: "Bakery",
-  port: 3307,
+  database: "defaultdb",
+  port: 14199,
 } );
 
 db.connect((err) => {
