@@ -1,5 +1,6 @@
+require('dotenv').config();
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
@@ -7,11 +8,11 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "mysql-3d83c4eb-rollno21eight-d059.g.aivencloud.com",
-  user: "avnadmin",
-  password: "",
-  database: "defaultdb",
-  port: 14199,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 } );
 
 db.connect((err) => {
@@ -86,8 +87,8 @@ app.post('/alogin', (req, res) => {
 
 // Endpoint to fetch all cakes
 app.get("/cakes", (req, res) => {
-  const sql = `SELECT * FROM product WHERE category="Cakes"`;
-  db.query(sql, (err, data) => {
+  const sql = `SELECT * FROM product WHERE category = ?`;
+  db.query(sql, ["Cakes"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -99,8 +100,8 @@ app.get("/cakes", (req, res) => {
 // Endpoint to fetch a specific cake by ID
 app.get("/cakes/:id", (req, res) => {
   const cakeId = req.params.id;
-  const sql = `SELECT * FROM product WHERE product_id = ? AND category="Cakes"`;
-  db.query(sql, [cakeId], (err, data) => {
+  const sql = `SELECT * FROM product WHERE product_id = ? AND category = ?`;
+  db.query(sql, [cakeId, "Cakes"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -128,8 +129,8 @@ app.get("/review/:id", (req, res) => {
 
 // Endpoint to fetch cookies
 app.get("/cookies", (req, res) => {
-  const sql = `SELECT * FROM product WHERE category="Cookies"`;
-  db.query(sql, (err, data) => {
+  const sql = `SELECT * FROM product WHERE category = ?`;
+  db.query(sql, ["Cookies"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -141,8 +142,8 @@ app.get("/cookies", (req, res) => {
 // Endpoint to fetch a specific cookie by ID
 app.get("/cookies/:id", (req, res) => {
   const cookieId = req.params.id;
-  const sql = `SELECT * FROM product WHERE product_id = ? AND category="Cookies"`;
-  db.query(sql, [cookieId], (err, data) => {
+  const sql = `SELECT * FROM product WHERE product_id = ? AND category = ?`;
+  db.query(sql, [cookieId, "Cookies"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -156,8 +157,8 @@ app.get("/cookies/:id", (req, res) => {
 
 // Endpoint to fetch all croissants
 app.get("/croissants", (req, res) => {
-  const sql = `SELECT * FROM product WHERE category="Croissant"`;
-  db.query(sql, (err, data) => {
+  const sql = `SELECT * FROM product WHERE category = ?`;
+  db.query(sql, ["Croissant"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -169,8 +170,8 @@ app.get("/croissants", (req, res) => {
 // Endpoint to fetch a specific croissant by ID
 app.get("/croissants/:id", (req, res) => {
   const croissantId = req.params.id;
-  const sql = `SELECT * FROM product WHERE product_id = ? AND category="Croissant"`;
-  db.query(sql, [croissantId], (err, data) => {
+  const sql = `SELECT * FROM product WHERE product_id = ? AND category = ?`;
+  db.query(sql, [croissantId, "Croissant"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -184,8 +185,8 @@ app.get("/croissants/:id", (req, res) => {
 
 // Endpoint to fetch doughnuts
 app.get("/doughnut", (req, res) => {
-  const sql = `SELECT * FROM product WHERE category="Doughnut"`;
-  db.query(sql, (err, data) => {
+  const sql = `SELECT * FROM product WHERE category = ?`;
+  db.query(sql, ["Doughnut"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -197,8 +198,8 @@ app.get("/doughnut", (req, res) => {
 // Endpoint to fetch a specific doughnut by ID
 app.get("/doughnut/:id", (req, res) => {
   const doughnutId = req.params.id;
-  const sql = `SELECT * FROM product WHERE product_id = ? AND category="Doughnut"`;
-  db.query(sql, [doughnutId], (err, data) => {
+  const sql = `SELECT * FROM product WHERE product_id = ? AND category = ?`;
+  db.query(sql, [doughnutId, "Doughnut"], (err, data) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.json(err);
@@ -559,6 +560,7 @@ app.get("/", (req, res) => {
 });
 
 // Start the server
-app.listen(8080, () => {
-  console.log("Listening on port 8080");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
