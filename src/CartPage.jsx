@@ -8,6 +8,11 @@ function CartPage() {
   const [userId, setUserId] = useState(null);
   const [data, setData] = useState([]);
 
+  const formatPrice = (value) => {
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? numericValue.toFixed(2) : '0.00';
+  };
+
   // Load user ID from localStorage
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
@@ -17,7 +22,7 @@ function CartPage() {
   // Fetch cart data when userId is available
   const fetchCartData = () => {
     if (userId) {
-      fetch(`http://localhost:8080/cart/${userId}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/cart/${userId}`)
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.error('Error fetching cart data:', err));
@@ -32,7 +37,7 @@ function CartPage() {
   const updateQuantity = (productId, quantity) => {
     if (quantity <= 0) return; // Prevent invalid quantity
 
-    axios.post(`http://localhost:8080/cart/${userId}/update`, {
+    axios.post(`https://bakeryapp-4yn5.onrender.com/cart/${userId}/update`, {
       productId,
       quantity,
     })
@@ -66,7 +71,7 @@ function CartPage() {
 
   // Remove item from cart
   const removeItem = (productId) => {
-    axios.post(`http://localhost:8080/cart/${userId}/delete`, {
+    axios.post(`https://bakeryapp-4yn5.onrender.com/cart/${userId}/delete`, {
       productId,
     })
       .then(response => {
@@ -95,7 +100,7 @@ function CartPage() {
               <img src={item.url} alt={item.product_name} />
               <div className="item-details">
                 <h3>{item.product_name}</h3>
-                <p>₹{item.price.toFixed(2)}</p>
+                <p>₹{formatPrice(item.price)}</p>
                 <div className="quantity-controls">
                   <button onClick={() => decreaseQuantity(item.product_id)}>-</button>
                   <span>{item.CartQuantity}</span>

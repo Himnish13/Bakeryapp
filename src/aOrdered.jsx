@@ -11,7 +11,7 @@ function AReview() {
   // Fetch products for review
   const fetchReviewData = () => {
    
-      fetch(`http://localhost:8080/rev/${orderId}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/rev/${orderId}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Fetched data:", data); //  Log the fetched data to check the structure

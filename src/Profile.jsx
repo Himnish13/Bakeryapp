@@ -20,7 +20,7 @@ export default function Profile() {
   // Fetch user data from API when userId is available
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8080/profile/${userId}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/profile/${userId}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error('Failed to fetch profile data');

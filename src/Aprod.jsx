@@ -8,7 +8,7 @@ const Aprod = () => {
 
   // Fetch products from the server
   const fetchProducts = () => {
-    fetch(`http://localhost:8080/products`)
+    fetch(`https://bakeryapp-4yn5.onrender.com/products`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error('Error fetching product data:', err));
@@ -31,7 +31,7 @@ const Aprod = () => {
 
   // Handle saving the new quantity
   const handleSetClick = (productId) => {
-    fetch(`http://localhost:8080/update-product/${productId}`, {
+    fetch(`https://bakeryapp-4yn5.onrender.com/update-product/${productId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ quantity: newQuantity }),

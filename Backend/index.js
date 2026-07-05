@@ -250,18 +250,24 @@ app.get("/order/:id", (req, res) => {
 
 
 app.post("/completeOrder", (req, res) => {
-  const { userId, totalAmount, totalQuantity, products, address, city, state, pincode } = req.body;
+  const { userId, totalAmount, totalQuantity, products, address, city, state, pincode, pinCode } = req.body;
+  const deliveryPin = pincode || pinCode || '';
   const orderSql = `INSERT INTO orders (user_id, total, quantity, Delivery_Location) VALUES (?, ?, ?, ?)`;
-  db.query(orderSql, [userId, totalAmount, totalQuantity, `${address}, ${city}, ${state}, ${pincode}`], (err, orderResult) => {
+  db.query(orderSql, [userId, totalAmount, totalQuantity, `${address}, ${city}, ${state}, ${deliveryPin}`], (err, orderResult) => {
     if (err) {
       console.error("Error inserting into orders:", err);
       return res.status(500).send("Failed to complete order");
     }
 
-    const orderId = orderResult.insertId; 
+    const orderId = orderResult.insertId;
+
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).send("No products provided for the order");
+    }
+
     const orderItems = products.map(({ product_id, quantity }) => [orderId, product_id, quantity]);
     const orderItemsSql = `INSERT INTO ordPro (order_id, pro_id, Ordquantity) VALUES ?`;
-    db.query(orderItemsSql, [orderItems], (err, itemsResult) => {
+    db.query(orderItemsSql, [orderItems], (err) => {
       if (err) {
         console.error("Error inserting into ordPro:", err);
         return res.status(500).send("Failed to add products to the order");

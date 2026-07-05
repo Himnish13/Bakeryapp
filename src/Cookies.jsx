@@ -7,7 +7,7 @@ export function Cookies() {
   const [cookies, setCookies] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/cookies') // Fetching data from the backend
+    fetch('https://bakeryapp-4yn5.onrender.com/cookies') // Fetching data from the backend
       .then((response) => response.json())
       .then((data) => setCookies(data))
       .catch((error) => console.error('Error fetching cookies:', error));
@@ -68,12 +68,12 @@ export function CookieDetail() {
     setUserId(storedUserId);
   }, []);
   useEffect(() => {
-    fetch(`http://localhost:8080/cookies/${id}`)
+    fetch(`https://bakeryapp-4yn5.onrender.com/cookies/${id}`)
       .then((response) => response.json())
       .then((data) => setCookie(data))
       .catch((error) => console.error('Error fetching cake:', error));
 
-      fetch(`http://localhost:8080/review/${id}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/review/${id}`)
       .then((response) => response.json())
       .then((data) => setFeedbacks(data))
       .catch((error) => console.error('Error fetching feedbacks:', error));
@@ -86,7 +86,7 @@ export function CookieDetail() {
       alert(`Only ${cookie.quantity} items available in stock. Please adjust the quantity.`);
       return;
     }
-    axios.post('http://localhost:8080/cart', {
+    axios.post('https://bakeryapp-4yn5.onrender.com/cart', {
       userId,
       productId: cookie.product_id,
       quantity,

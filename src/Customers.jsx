@@ -6,7 +6,7 @@ const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const fetchCustomerData = () => {
     
-      fetch(`http://localhost:8080/customer`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/customer`)
         .then(res => res.json())
         .then(data => setCustomers(data))
         .catch(err => console.error('Error fetching cart data:', err));

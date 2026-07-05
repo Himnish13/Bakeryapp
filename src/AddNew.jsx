@@ -20,7 +20,7 @@ function AddNew() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/add-product', {
+      const response = await fetch('https://bakeryapp-4yn5.onrender.com/add-product', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -7,7 +7,7 @@ export function Doughnuts() {
   const [doughnuts, setDoughnuts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/doughnut') // Fetching from backend
+    fetch('https://bakeryapp-4yn5.onrender.com/doughnut') // Fetching from backend
       .then((response) => response.json())
       .then((data) => setDoughnuts(data))
       .catch((error) => console.error('Error fetching doughnuts:', error));
@@ -70,12 +70,12 @@ export function DoughnutDetail() {
     setUserId(storedUserId);
   }, []);
   useEffect(() => {
-    fetch(`http://localhost:8080/doughnut/${id}`) // Fetch a single doughnut by ID
+    fetch(`https://bakeryapp-4yn5.onrender.com/doughnut/${id}`) // Fetch a single doughnut by ID
       .then((response) => response.json())
       .then((data) => setDoughnut(data))
       .catch((error) => console.error('Error fetching doughnut:', error));
 
-      fetch(`http://localhost:8080/review/${id}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/review/${id}`)
       .then((response) => response.json())
       .then((data) => setFeedbacks(data))
       .catch((error) => console.error('Error fetching feedbacks:', error));
@@ -85,7 +85,7 @@ export function DoughnutDetail() {
       alert(`Only ${doughnut.quantity} items available in stock. Please adjust the quantity.`);
       return;
     }
-    axios.post('http://localhost:8080/cart', {
+    axios.post('https://bakeryapp-4yn5.onrender.com/cart', {
       userId,
       productId: doughnut.product_id,
       quantity,

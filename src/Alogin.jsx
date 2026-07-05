@@ -12,7 +12,7 @@ function Admin() {
 
     try {
       
-      const response = await fetch('http://localhost:8080/alogin', {
+      const response = await fetch('https://bakeryapp-4yn5.onrender.com/alogin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

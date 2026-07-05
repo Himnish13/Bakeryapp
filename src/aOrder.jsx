@@ -20,7 +20,7 @@ export default function AOrder() {
   // Fetch order history when userId is available
   useEffect(() => {
    
-      fetch(`http://localhost:8080/orderhistory`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/orderhistory`)
         .then(res => res.json())
         .then(data => {
           console.log("Fetched data:", data); // Debug fetched data

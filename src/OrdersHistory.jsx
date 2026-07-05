@@ -25,7 +25,7 @@ export default function OrderHistory() {
   // Fetch order history when userId is available
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8080/orderhistory/${userId}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/orderhistory/${userId}`)
         .then(res => res.json())
         .then(data => {
           console.log("Fetched data:", data); // Debug fetched data
@@ -37,6 +37,7 @@ export default function OrderHistory() {
 
   // Function to handle order click
   const handleOrderClick = (orderId) => {
+    localStorage.setItem('lastOrderId', orderId);
     navigate('/review', { state: { orderId } });  // Pass orderId in state (not URL)
   };
 

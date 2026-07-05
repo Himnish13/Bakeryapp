@@ -10,7 +10,12 @@ function ReviewPage() {
   const [ratings, setRatings] = useState({}); // Tracks rating for each product
   const [feedbackText, setFeedbackText] = useState({}); // Tracks feedback text for each product
   const location = useLocation();
-  const { orderId } = location.state || {}; // Ensure this is getting the orderId properly
+  const orderId = location.state?.orderId || localStorage.getItem('lastOrderId');
+
+  const formatPrice = (value) => {
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? numericValue.toFixed(2) : '0.00';
+  };
 
   //  Load user ID from localStorage
   useEffect(() => {
@@ -20,23 +25,26 @@ function ReviewPage() {
 
   // Fetch products for review
   const fetchReviewData = () => {
-    if (userId) {
-      fetch(`http://localhost:8080/rev/${orderId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("Fetched data:", data); // Log the fetched data to check the structure
-          if (Array.isArray(data)) {
-            setData(data);
-          } else {
-            console.error("Fetched data is not an array:", data);
-            setData([]); // Set empty array in case of invalid response
-          }
-        })
-        .catch((err) => {
-          console.error('Error fetching review data:', err);
-          setData([]); // Set empty array on error
-        });
+    if (!orderId) {
+      setData([]);
+      return;
     }
+
+    fetch(`https://bakeryapp-4yn5.onrender.com/rev/${orderId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched data:", data); // Log the fetched data to check the structure
+        if (Array.isArray(data)) {
+          setData(data);
+        } else {
+          console.error("Fetched data is not an array:", data);
+          setData([]); // Set empty array in case of invalid response
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching review data:', err);
+        setData([]); // Set empty array on error
+      });
   };
 
   useEffect(() => {
@@ -78,7 +86,7 @@ function ReviewPage() {
 
     // Submit the review
     axios
-      .post(`http://localhost:8080/review/submit`, {
+      .post(`https://bakeryapp-4yn5.onrender.com/review/submit`, {
         userId,
         orderId,
         productId,
@@ -114,7 +122,7 @@ function ReviewPage() {
               <img src={item.url} alt={item.product_name} />
               <div className="item-details">
                 <h3>{item.product_name}</h3>
-                <p>₹{item.price.toFixed(2)}</p>
+                <p>₹{formatPrice(item.price)}</p>
 
                 {showRatingInput[item.product_id] ? (
                   <div className="rating-section">

@@ -7,7 +7,7 @@ export function Croissants() {
   const [croissants, setCroissants] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/croissants') // Replace with your actual endpoint
+    fetch('https://bakeryapp-4yn5.onrender.com/croissants') // Replace with your actual endpoint
       .then((response) => response.json())
       .then((data) => setCroissants(data))
       .catch((error) => console.error('Error fetching croissants:', error));
@@ -70,12 +70,12 @@ export function CroissantDetail() {
     setUserId(storedUserId);
   }, []);
   useEffect(() => {
-    fetch(`http://localhost:8080/croissants/${id}`) // Replace with your actual endpoint
+    fetch(`https://bakeryapp-4yn5.onrender.com/croissants/${id}`) // Replace with your actual endpoint
       .then((response) => response.json())
       .then((data) => setCroissant(data))
       .catch((error) => console.error('Error fetching croissant:', error));
 
-      fetch(`http://localhost:8080/review/${id}`)
+      fetch(`https://bakeryapp-4yn5.onrender.com/review/${id}`)
       .then((response) => response.json())
       .then((data) => setFeedbacks(data))
       .catch((error) => console.error('Error fetching feedbacks:', error));
@@ -85,7 +85,7 @@ export function CroissantDetail() {
       alert(`Only ${croissant.quantity} items available in stock. Please adjust the quantity.`);
       return;
     }
-    axios.post('http://localhost:8080/cart', {
+    axios.post('https://bakeryapp-4yn5.onrender.com/cart', {
       userId,
       productId: croissant.product_id,
       quantity,

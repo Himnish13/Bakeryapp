@@ -8,7 +8,7 @@ export function Cake() {
   const [cakes, setCakes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/cakes') // Fetch cakes from backend
+    fetch('https://bakeryapp-4yn5.onrender.com/cakes') // Fetch cakes from backend
       .then((response) => response.json())
       .then((data) => setCakes(data))
       .catch((error) => console.error('Error fetching cakes:', error));
@@ -74,12 +74,12 @@ export function CakeDetail() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/cakes/${id}`)
+    fetch(`https://bakeryapp-4yn5.onrender.com/cakes/${id}`)
       .then((response) => response.json())
       .then((data) => setCake(data))
       .catch((error) => console.error('Error fetching cake:', error));
 
-    fetch(`http://localhost:8080/review/${id}`)
+    fetch(`https://bakeryapp-4yn5.onrender.com/review/${id}`)
       .then((response) => response.json())
       .then((data) => setFeedbacks(data))
       .catch((error) => console.error('Error fetching feedbacks:', error));
@@ -91,7 +91,7 @@ export function CakeDetail() {
       return;
     }
 
-    axios.post('http://localhost:8080/cart', {
+    axios.post('https://bakeryapp-4yn5.onrender.com/cart', {
       userId,
       productId: cake.product_id,
       quantity,

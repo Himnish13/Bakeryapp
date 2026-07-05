@@ -34,7 +34,9 @@ export default function DeliveryPage() {
     setUserId(storedUserId);
   }, []);
   useEffect(() => {
-    fetch(`http://localhost:8080/order/${userId}`)
+    if (!userId) return;
+
+    fetch(`https://bakeryapp-4yn5.onrender.com/order/${userId}`)
       .then(res => res.json())
       .then(data => Update(data))
       .catch(err => console.log(err));
@@ -44,8 +46,8 @@ export default function DeliveryPage() {
   let totalQuantity = 0;
  
   data.forEach(item => {
-    totalAmount += item.price * item.CartQuantity;
-    totalQuantity += item.CartQuantity;
+    totalAmount += Number(item.price) * Number(item.CartQuantity);
+    totalQuantity += Number(item.CartQuantity);
   });
 
   const handlePlaceOrder = () => {
@@ -56,13 +58,13 @@ export default function DeliveryPage() {
     }
   };
 
-  const handleClose = () => {
+  const handleConfirmOrder = () => {
     const products = data.map(item => ({
       product_id: item.prod_id,
       quantity: item.CartQuantity,
     }));
 
-    axios.post('http://localhost:8080/completeOrder', {
+    axios.post('https://bakeryapp-4yn5.onrender.com/completeOrder', {
       userId,
       totalAmount,
       totalQuantity,
@@ -70,17 +72,16 @@ export default function DeliveryPage() {
       address,
       city,
       state,
-      pinCode,
+      pincode: pinCode,
     })
     .then(response => {
       console.log(response.data);
-      navigate('/Orders'); 
       setOpen(false); 
+      navigate('/Orders');
     })
     .catch(error => {
       console.error('Error completing order:', error);
     });
-    setOpen(false);
   };
 
   // Check if all required fields are filled
@@ -153,7 +154,7 @@ export default function DeliveryPage() {
                 <TableRow key={index}>
                   <TableCell sx={{ fontSize: '17px' }}>{item.product_name}</TableCell>
                   <TableCell align="center" sx={{ fontSize: '17px' }}>{item.CartQuantity}</TableCell>
-                  <TableCell align="center" sx={{ fontSize: '17px' }}>{item.price * item.CartQuantity}</TableCell>
+                  <TableCell align="center" sx={{ fontSize: '17px' }}>{Number(item.price) * Number(item.CartQuantity)}</TableCell>
                 </TableRow>
               ))}
               <TableRow>
@@ -179,7 +180,7 @@ export default function DeliveryPage() {
       {/* Order Success Dialog */}
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="order-placed-title"
         aria-describedby="order-placed-description"
       >
@@ -190,7 +191,7 @@ export default function DeliveryPage() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button onClick={handleConfirmOrder} color="primary" variant="contained">
             OK
           </Button>
         </DialogActions>

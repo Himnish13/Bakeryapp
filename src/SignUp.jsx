@@ -17,7 +17,7 @@ function Sign() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/signup', {
+      const response = await fetch('https://bakeryapp-4yn5.onrender.com/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
